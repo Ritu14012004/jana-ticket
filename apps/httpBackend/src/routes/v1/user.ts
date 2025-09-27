@@ -4,17 +4,18 @@ const router = Router();
 
 router.post("/signup",(req,res)=>{
     const phoneNumber = req.body.phoneNumber;
-   const totp= generateToken(phoneNumber + "Signup");
+   const totp = generateToken(phoneNumber + "SIGNUP");
+   console.log(totp);
    //send otp on number
-   res.json({
+   res.json({ 
     id:"1"
-   })
+    });
 
 })
 router.post("/signup/verify",(req,res)=>{
      const phoneNumber = req.body.phoneNumber;
    const totp= generateToken(phoneNumber + "Signup");
-  if(verifyToken(phoneNumber + "Signup" ,req.body.otp)){
+  if(!verifyToken(phoneNumber + "Signup" ,req.body.otp)){
     res.json({
         message:"Invalid Token"
     })
